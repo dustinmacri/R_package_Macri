@@ -71,13 +71,14 @@ length(unique(butterfly$ButterflySpecies))
 
 ```{r, eval=FALSE}
 
-# butterfly1 <- ggplot(butterfly, mapping = aes(x = SpringTemp, y = Day)) + geom_point()
+# butterfly1 <- ggplot(butterfly, mapping = aes(x = SpringTemp, y = Day)) + geom_point() + stat_smooth(method = "lm")
 
-  butterfly2 <- ggplot(butterfly, mapping = aes(x = SummerTemp, y = Day)) + geom_point()
+  butterfly2 <- ggplot(butterfly, mapping = aes(x = SummerTemp, y = Day)) + geom_point() + stat_smooth(method = "lm")
 
-  butterfly3 <- ggplot(butterfly, mapping = aes(x = Day, y = Year)) + geom_point()
+  butterfly3 <- ggplot(butterfly, mapping = aes(x = Day, y = Year)) + geom_point() +
+stat_smooth(method = "lm")
 
-I believe that Spring temp is the best predictor as its graph is the most linear and makes the most sense as spring is the season where life blooms and is not naturally hot like that of summer.
+I believe that Spring temp is the best predictor as its graph is the most linearly viable and makes the most sense as spring is the season where life blooms and is not naturally hot like that of summer.
 ```
 
 5) Is there a significant linear relationship between any predictors and the response? (10 pts)
@@ -106,7 +107,8 @@ I believe that Spring temp is the best predictor as its graph is the most linear
 
 ```{r, eval=FALSE}
 
-# butterflyfacet <- ggplot(butterfly, mapping = aes(x = SpringTemp, y = Day, color =  ButterflySpecies)) + geom_point() + facet_wrap(facets = vars(ButterflySpecies)) 
+# butterflyfacet <- ggplot(butterfly, mapping = aes(x = SpringTemp, y = Day, color =  ButterflySpecies)) + geom_point() + facet_wrap(facets = vars(ButterflySpecies)) +
+ stat_smooth(method = "lm", color = "red")
 
 ```
 
@@ -118,7 +120,8 @@ I believe that Spring temp is the best predictor as its graph is the most linear
 # joinedbutterfly <- butterfly %>% 
 + inner_join(phenology)
 
-  ggplot(joinedbutterfly, mapping = aes(x = AnnualTemp, y = Day, color = ButterflySpecies)) + geom_point() + facet_wrap(facets = vars(ButterflySpecies)) 
+  ggplot(joinedbutterfly, mapping = aes(x = AnnualTemp, y = Day, color = ButterflySpecies)) + geom_point() + facet_wrap(facets = vars(ButterflySpecies)) +
+stat_smooth(method = "lm", color = "red")  
   
   My opinion has positively changed as I can see more of relation between temperature and day of emergence across each species of butterfly, especially that I am now using annual temperature.
   
