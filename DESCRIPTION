@@ -1,0 +1,12 @@
+Package: MacriRPackage
+Title: Sciency Stuff R Package
+Version: 0.0.0.9000
+Authors@R: 
+    person("Dustin", "Macri", , "dustin.macri@selu.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: R Package has data and functions regarding the surveys dataset for Project
+             III in class. Also contains the butterfly data for Project II.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
