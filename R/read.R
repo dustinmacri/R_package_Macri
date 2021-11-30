@@ -8,5 +8,6 @@
 read <- function(x){
   fileread <- read_csv(x) %>% 
   na.omit(fileread)
-  return(fileread)
+  is.data.frame(fileread)
+  return(fileread) 
 }

@@ -2,16 +2,20 @@
 % Please edit documentation in R/linreg.R
 \name{linreg}
 \alias{linreg}
-\title{Creates a linear regression between weight and hindfoot length of a dataset}
+\title{Creates a linear regression between two traits of a dataset}
 \usage{
-linreg(surveys)
+linreg(surveys, surveys$weight, surveys$hindfoot_length)
 }
 \arguments{
-\item{z}{The dataset being used}
+\item{a}{The dataset being used}
+
+\item{x}{The first trait (Needs a $ as a part of a dataset)}
+
+\item{y}{The second trait (Needs a $ as a part of a dataset)}
 }
 \value{
 lr The linear regression between the two values
 }
 \description{
-Creates a linear regression between weight and hindfoot length of a dataset
+Creates a linear regression between two traits of a dataset
 }

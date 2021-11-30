@@ -1,10 +1,13 @@
-#' Creates a linear regression between weight and hindfoot length of a dataset
+#' Creates a linear regression between two traits of a dataset
 #' 
-#' @param z The dataset being used
+#' @param a The dataset being used
+#' @param x The first trait (Needs a $ as a part of a dataset)
+#' @param y The second trait (Needs a $ as a part of a dataset)
 #' @return lr The linear regression between the two values
 #' @usage
-#' linreg(surveys)
-linreg <- function(z){
-  lr <- summary(lm(formula = weight ~ hindfoot_length, data = z))
+#' linreg(surveys, surveys$weight, surveys$hindfoot_length)
+linreg <- function(a, x, y){
+  lr <- summary(lm(data = a, formula = x ~ y))
+  is.numeric(lr)
   return(lr)
 }
