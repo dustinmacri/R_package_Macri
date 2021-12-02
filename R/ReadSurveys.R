@@ -1,4 +1,4 @@
-surveys <- read.csv("/cloud/project/data/surveys.csv")
+surveys <- read_csv("/cloud/project/data/surveys.csv")
   na.omit(surveys)
 
 #' Expected input: surveys.csv to be read without any NA values
