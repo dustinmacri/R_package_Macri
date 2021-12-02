@@ -6,7 +6,7 @@
 #' read("cloud/project/data/surveys.csv")
 #' read("cloud/project/data/Butterfly_data.csv") 
 read <- function(x){
-  fileread <- read_csv(x) %>% 
+  fileread <- read_csv(x)
   na.omit(fileread)
   is.data.frame(fileread)
   return(fileread) 
