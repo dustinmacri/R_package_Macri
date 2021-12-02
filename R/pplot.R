@@ -9,6 +9,9 @@
 #' pplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$sex)
 pplot <- function(a, b, c, d){
   plot <- ggplot(a, mapping = aes(x = b, y = c, color = d)) + geom_point() + geom_jitter(alpha = 0.7)
-  is.ggplot(plot)
-  return(plot) 
+  if(is.ggplot(plot)){
+    return(plot)
+  }
+  else{
+  return("ERROR - Not a plot")} 
 }

@@ -10,7 +10,10 @@
 #' 
 lrplot <- function(a, b, c, d){
   plot <- ggplot(a, mapping = aes(x = b, y = c, color = d)) + geom_point() + geom_jitter(alpha = 0.7) + geom_smooth(method = "lm", color = "black")
-  is.ggplot(pplot)
-  return(plot)
+  if(is.ggplot(plot)){
+    return(plot)
+  }
+  else{
+  return("ERROR - Not a plot")}
 }
 

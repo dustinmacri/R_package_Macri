@@ -8,6 +8,9 @@
 #' linreg(surveys, surveys$weight, surveys$hindfoot_length)
 linreg <- function(a, x, y){
   lr <- summary(lm(data = a, formula = x ~ y))
-  is.numeric(lr)
-  return(lr)
+  if(is.numeric(lr)) {
+    return(lr)
+  }
+  else {
+  return ("ERROR - Not numeric")}
 }
