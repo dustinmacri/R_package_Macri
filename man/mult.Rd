@@ -4,8 +4,7 @@
 \alias{mult}
 \title{Multiply together two numbers}
 \usage{
-mult(4,5)
-mult(6,7)
+mult(x, y)
 }
 \arguments{
 \item{x}{A number}

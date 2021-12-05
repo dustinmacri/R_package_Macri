@@ -7,7 +7,9 @@
 #' @return plot The resulting plot with a linear regression between weight and hindfoot length
 #' @usage 
 #' lrplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$sex)
-#' 
+#' @export
+
+
 lrplot <- function(a, b, c, d){
   plot <- ggplot(a, mapping = aes(x = b, y = c, color = d)) + geom_point() + geom_jitter(alpha = 0.7) + geom_smooth(method = "lm", color = "black")
   if(is.ggplot(plot)){

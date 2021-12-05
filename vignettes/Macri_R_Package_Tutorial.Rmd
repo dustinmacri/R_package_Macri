@@ -25,15 +25,15 @@ install.packages("vcfr")
 
 Now, we install my R package:
 
-```{r, eval= FALSE}
-devtools::install_github("dustinmacri/R_package_Macri")
-library(MacriRPAckage)
+```{r}
+#devtools::install_github("dustinmacri/R_package_Macri")
+library(MacriRPackage)
 ```
 
 Let us download some data for our package:
 
 ```{r}
-download.file()
+download.file("https://raw.githubusercontent.com/BiologicalDataAnalysis2019/2021/main/data/surveys.csv", destfile = "/cloud/project/data/surveys.csv")
 ```
 
 ## Working Example
@@ -43,7 +43,7 @@ download.file()
 + Say something about about expected output
 
 ```{r}
-result <- mult(4,5)
+result <- read("/cloud/project/data/surveys.csv")
 ```
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.

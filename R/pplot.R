@@ -7,6 +7,8 @@
 #' @return plot The resulting plot showing weight against hindfoot length of the dataset
 #' @usage 
 #' pplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$sex)
+#' @export
+
 pplot <- function(a, b, c, d){
   plot <- ggplot(a, mapping = aes(x = b, y = c, color = d)) + geom_point() + geom_jitter(alpha = 0.7)
   if(is.ggplot(plot)){

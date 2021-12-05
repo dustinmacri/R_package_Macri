@@ -6,6 +6,8 @@
 #' @return lr The linear regression between the two values
 #' @usage
 #' linreg(surveys, surveys$weight, surveys$hindfoot_length)
+#' @export
+
 linreg <- function(a, x, y){
   lr <- summary(lm(data = a, formula = x ~ y))
   if(is.numeric(lr)) {
