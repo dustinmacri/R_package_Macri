@@ -16,6 +16,6 @@ lrplot <- function(a, b, c, d){
     return(plot)
   }
   else{
-  return("ERROR - Not a plot")}
+  return("ERROR - Not a plot")} 
 }
 
