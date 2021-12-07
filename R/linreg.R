@@ -10,9 +10,10 @@
 
 linreg <- function(a, x, y){
   lr <- summary(lm(data = a, formula = x ~ y))
-  if(is.numeric(lr)) {
-    return(lr)
-  }
+  if(is.na(lr)){
+    return("ERROR - NA")
+    }
   else {
-  return ("ERROR - Not numeric")}
+  return (lr)
+    }
 }

@@ -8,9 +8,8 @@
 
 read <- function(x){
   fileread <- read_csv(x)
-  na.omit(fileread)
   if(is.data.frame(fileread)){
-    return(fileread)
+    return(na.omit(fileread))
   }
   else{
   return("ERROR - Not a dataframe")

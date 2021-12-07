@@ -18,15 +18,10 @@ library(ggplot2)
 library(tidyverse)
 ```
 
-You might need to install some genomics R packages for this package to run
-```{r, eval= FALSE}
-install.packages("vcfr")
-```
-
 Now, we install my R package:
 
 ```{r}
-#devtools::install_github("dustinmacri/R_package_Macri")
+devtools::install_github("dustinmacri/R_package_Macri")
 library(MacriRPackage)
 ```
 
@@ -36,30 +31,66 @@ Let us download some data for our package:
 download.file("https://raw.githubusercontent.com/BiologicalDataAnalysis2019/2021/main/data/surveys.csv", destfile = "/cloud/project/data/surveys.csv")
 ```
 
-## Working Example
 
-+ An example of each function and how it works
-+ Say something about why this is a good thing to do
-+ Say something about about expected output
+## Function: 'read'
+
+The 'read' function reads the selected file in Tidyverse and removes all NA values from the data that it is reading.
+
+Expected output: A proper data set that has all, if any, NA values removed from it. 
+
+This function is a good thing to have as it essentially streamlines the file- reading process by automatically reading files in Tidyverse and removing NA values. This may prove useful when having to perform multiple calculations with various data sets at a time, removing much of the hassle in the process.
 
 ```{r}
-result <- read("/cloud/project/data/surveys.csv")
+surveys <- read("/cloud/project/data/surveys.csv")
 ```
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Function: 'pplot'
 
-```{r cars}
-summary(cars)
+The 'pplot' function creates a point plot in ggplot2 based on the given inputs: first input is the data set, the second input is the x-axis trait, the third input is the y-axis trait, and the fourth input is the trait that color is based upon.
+
+Expected output: A proper point plot that compares two traits on a data set and has colors determined by a certain trait.
+
+This is a good function to use in order to quickly make a point plot between two traits of a data set. It saves the hassle of making a point plot through ggplot, useful if you are making multiple basic plots at a time; However, the plots are quite basic and only point plots are created.
+
+```{r}
+surveysplot <- pplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$sex)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r surveysplot, echo=FALSE}
+plot(surveysplot)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Function: 'linreg'
+
+The 'linreg' function produces a linear regression and a resulting summary between two traits of a data set.
+
+Expected output: A summary that includes the linear regression between two specific traits of the data set
+
+This function is great for quickly and efficiently making linear regressions. The simple function has been streamlined to produce linear regression summaries between any two traits on any dataset, perfect for projects that require many regressions to be created and analyzed.
+
+```{r}
+surveyslr <- linreg(surveys, surveys$weight, surveys$hindfoot_length)
+```
+
+```{r surveyslr, echo=FALSE}
+surveyslr
+```
+
+
+## Function: 'lrplot'
+
+The 'lrplot' function essentially combines the last two functions together. It creates a point plot from ggplot based on specific inputs (first input is the data set, the second input is the x-axis trait, the third input is the y-axis trait, and the fourth input is the trait that color is based upon) as well as placing a linear regression on the plot to show any trends in the data.
+
+Expected output: A proper point plot that compares two traits on a data set and has colors determined by a certain trait with a linear regression line to show trends.
+
+This function is good for anyone who just so happens to need to create a point plot with a linear regression placed on top of it. Like the functions before, the function's goal is streamline the plot and linear regression creation process, which may save someone some time and sanity.
+
+```{r}
+surveyslrplot <- lrplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$sex)
+```
+
+```{r surveyslrplot, echo=FALSE}
+plot(surveyslrplot)
+```
