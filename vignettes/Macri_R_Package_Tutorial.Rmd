@@ -59,7 +59,7 @@ surveysplot <- pplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$s
 
 ```{r surveysplot, echo=FALSE}
 plot(surveysplot)
-```
+``` 
 
 
 ## Function: 'linreg'
