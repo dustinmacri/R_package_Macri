@@ -41,6 +41,18 @@ Expected output: A proper data set that has all, if any, NA values removed from 
 This function is a good thing to have as it essentially streamlines the file- reading process by automatically reading files in Tidyverse and removing NA values. This may prove useful when having to perform multiple calculations with various data sets at a time, removing much of the hassle in the process.
 
 ```{r}
+read <- function(x){
+  fileread <- read_csv(x)
+  if(is.data.frame(fileread)){
+    return(na.omit(fileread))
+  }
+  else{
+  return("ERROR - Not a dataframe")
+  }
+}
+```
+
+```{r}
 surveys <- read("/cloud/project/data/surveys.csv")
 ```
 
@@ -52,6 +64,17 @@ The 'pplot' function creates a point plot in ggplot2 based on the given inputs: 
 Expected output: A proper point plot that compares two traits on a data set and has colors determined by a certain trait.
 
 This is a good function to use in order to quickly make a point plot between two traits of a data set. It saves the hassle of making a point plot through ggplot, useful if you are making multiple basic plots at a time; However, the plots are quite basic and only point plots are created.
+
+```{r}
+pplot <- function(a, b, c, d){
+  plot <- ggplot(a, mapping = aes(x = b, y = c, color = d)) + geom_point() + geom_jitter(alpha = 0.7)
+  if(is.ggplot(plot)){
+    return(plot)
+  }
+  else{
+  return("ERROR - Not a plot")} 
+}
+```
 
 ```{r}
 surveysplot <- pplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$sex)
@@ -71,6 +94,18 @@ Expected output: A summary that includes the linear regression between two speci
 This function is great for quickly and efficiently making linear regressions. The simple function has been streamlined to produce linear regression summaries between any two traits on any dataset, perfect for projects that require many regressions to be created and analyzed.
 
 ```{r}
+linreg <- function(a, x, y){
+  lr <- summary(lm(data = a, formula = x ~ y))
+  if(is.na(lr)){
+    return("ERROR - NA")
+    }
+  else {
+  return (lr)
+    }
+}
+```
+
+```{r}
 surveyslr <- linreg(surveys, surveys$weight, surveys$hindfoot_length)
 ```
 
@@ -86,6 +121,17 @@ The 'lrplot' function essentially combines the last two functions together. It c
 Expected output: A proper point plot that compares two traits on a data set and has colors determined by a certain trait with a linear regression line to show trends.
 
 This function is good for anyone who just so happens to need to create a point plot with a linear regression placed on top of it. Like the functions before, the function's goal is streamline the plot and linear regression creation process, which may save someone some time and sanity.
+
+```{r}
+lrplot <- function(a, b, c, d){
+  plot <- ggplot(a, mapping = aes(x = b, y = c, color = d)) + geom_point() + geom_jitter(alpha = 0.7) + geom_smooth(method = "lm", color = "black")
+  if(is.ggplot(plot)){
+    return(plot)
+  }
+  else{
+  return("ERROR - Not a plot")} 
+}
+```
 
 ```{r}
 surveyslrplot <- lrplot(surveys, surveys$weight, surveys$hindfoot_length, surveys$sex)

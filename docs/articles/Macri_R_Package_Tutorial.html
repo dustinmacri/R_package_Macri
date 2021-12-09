@@ -101,9 +101,9 @@
 <pre><code><span class="co">## Using github PAT from envvar GITHUB_PAT</span></code></pre>
 <pre><code><span class="co">## Downloading GitHub repo dustinmacri/R_package_Macri@HEAD</span></code></pre>
 <pre><code>##   
-   checking for file ‘/tmp/RtmpLjFOyZ/remotesfbf44b72d71/dustinmacri-R_package_Macri-b284fd0/DESCRIPTION’ ...
+   checking for file ‘/tmp/RtmpKSNLJu/remotes14ae37599a27/dustinmacri-R_package_Macri-62097f4/DESCRIPTION’ ...
   
- [32m✓ [39m   [38;5;247mchecking for file ‘/tmp/RtmpLjFOyZ/remotesfbf44b72d71/dustinmacri-R_package_Macri-b284fd0/DESCRIPTION’ [39m [36m [39m
+ [32m✓ [39m   [38;5;247mchecking for file ‘/tmp/RtmpKSNLJu/remotes14ae37599a27/dustinmacri-R_package_Macri-62097f4/DESCRIPTION’ [39m [36m [39m
 ## 
   
  [38;5;247m─ [39m [38;5;247m   [39m [38;5;247mpreparing ‘MacriRPackage’: [39m [36m [39m
@@ -118,15 +118,15 @@
 ## 
   
  [38;5;247m─ [39m [38;5;247m   [39m [38;5;247mchecking for empty or unneeded directories [39m [36m [39m
+##  [38;5;247m─ [39m [38;5;247m   [39m [38;5;247mlooking to see if a ‘data/datalist’ file should be added [39m [36m [39m
 ## 
   
- [38;5;247m─ [39m [38;5;247m   [39m [38;5;247mlooking to see if a ‘data/datalist’ file should be added [39m [36m [39m
-##  [38;5;247m─ [39m [38;5;247m   [39m [38;5;247mbuilding ‘MacriRPackage_0.0.0.9000.tar.gz’ [39m [36m [39m
+ [38;5;247m─ [39m [38;5;247m   [39m [38;5;247mbuilding ‘MacriRPackage_0.0.0.9000.tar.gz’ [39m [36m [39m
 ## 
   
    
 ## </code></pre>
-<pre><code><span class="co">## Installing package into '/tmp/RtmpAc6tux/temp_libpath11a7626a3d8'</span>
+<pre><code><span class="co">## Installing package into '/tmp/RtmpAc6tux/temp_libpath11a54582fa7'</span>
 <span class="co">## (as 'lib' is unspecified)</span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MacriRPackage</span><span class="op">)</span></code></pre></div>
@@ -141,6 +141,16 @@
 <p>Expected output: A proper data set that has all, if any, NA values removed from it.</p>
 <p>This function is a good thing to have as it essentially streamlines the file- reading process by automatically reading files in Tidyverse and removing NA values. This may prove useful when having to perform multiple calculations with various data sets at a time, removing much of the hassle in the process.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">read</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">fileread</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">fileread</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">fileread</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span>
+  <span class="kw">else</span><span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="st">"ERROR - Not a dataframe"</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">surveys</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.html">read</a></span><span class="op">(</span><span class="st">"/cloud/project/data/surveys.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">35549</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">9</span></span></code></pre>
 <pre><code><span class="co">## <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
@@ -157,7 +167,16 @@
 <p>The ‘pplot’ function creates a point plot in ggplot2 based on the given inputs: first input is the data set, the second input is the x-axis trait, the third input is the y-axis trait, and the fourth input is the trait that color is based upon.</p>
 <p>Expected output: A proper point plot that compares two traits on a data set and has colors determined by a certain trait.</p>
 <p>This is a good function to use in order to quickly make a point plot between two traits of a data set. It saves the hassle of making a point plot through ggplot, useful if you are making multiple basic plots at a time; However, the plots are quite basic and only point plots are created.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pplot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">a</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">b</span>, y <span class="op">=</span> <span class="va">c</span>, color <span class="op">=</span> <span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/is.ggplot.html" class="external-link">is.ggplot</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span>
+  <span class="op">}</span>
+  <span class="kw">else</span><span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="st">"ERROR - Not a plot"</span><span class="op">)</span><span class="op">}</span> 
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">surveysplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pplot.html">pplot</a></span><span class="op">(</span><span class="va">surveys</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">weight</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">hindfoot_length</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></code></pre></div>
 <p><img src="Macri_R_Package_Tutorial_files/figure-html/surveysplot-1.png" width="700"></p>
 </div>
@@ -167,7 +186,17 @@
 <p>The ‘linreg’ function produces a linear regression and a resulting summary between two traits of a data set.</p>
 <p>Expected output: A summary that includes the linear regression between two specific traits of the data set</p>
 <p>This function is great for quickly and efficiently making linear regressions. The simple function has been streamlined to produce linear regression summaries between any two traits on any dataset, perfect for projects that require many regressions to be created and analyzed.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">linreg</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">a</span>, formula <span class="op">=</span> <span class="va">x</span> <span class="op">~</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">lr</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="st">"ERROR - NA"</span><span class="op">)</span>
+    <span class="op">}</span>
+  <span class="kw">else</span> <span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span> <span class="op">(</span><span class="va">lr</span><span class="op">)</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">surveyslr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linreg.html">linreg</a></span><span class="op">(</span><span class="va">surveys</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">weight</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">hindfoot_length</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning in if (is.na(lr)) {: the condition has length &gt; 1 and only the first</span>
 <span class="co">## element will be used</span></code></pre>
@@ -196,7 +225,16 @@
 <p>The ‘lrplot’ function essentially combines the last two functions together. It creates a point plot from ggplot based on specific inputs (first input is the data set, the second input is the x-axis trait, the third input is the y-axis trait, and the fourth input is the trait that color is based upon) as well as placing a linear regression on the plot to show any trends in the data.</p>
 <p>Expected output: A proper point plot that compares two traits on a data set and has colors determined by a certain trait with a linear regression line to show trends.</p>
 <p>This function is good for anyone who just so happens to need to create a point plot with a linear regression placed on top of it. Like the functions before, the function’s goal is streamline the plot and linear regression creation process, which may save someone some time and sanity.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lrplot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">a</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">b</span>, y <span class="op">=</span> <span class="va">c</span>, color <span class="op">=</span> <span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/is.ggplot.html" class="external-link">is.ggplot</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span>
+  <span class="op">}</span>
+  <span class="kw">else</span><span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="st">"ERROR - Not a plot"</span><span class="op">)</span><span class="op">}</span> 
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">surveyslrplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lrplot.html">lrplot</a></span><span class="op">(</span><span class="va">surveys</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">weight</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">hindfoot_length</span>, <span class="va">surveys</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## `geom_smooth()` using formula 'y ~ x'</span></code></pre>
 <p><img src="Macri_R_Package_Tutorial_files/figure-html/surveyslrplot-1.png" width="700"></p>
