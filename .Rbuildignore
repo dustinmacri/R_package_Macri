@@ -1,0 +1,9 @@
+^LICENSE\.md$
+^.*\.Rproj$
+^\.Rproj\.user$
+^Macri_R_Package\.Rcheck$
+^Macri_R_Package.*\.tar\.gz$
+^Macri_R_Package.*\.tgz$
+^MacriRPackage\.Rcheck$
+^MacriRPackage.*\.tar\.gz$
+^MacriRPackage.*\.tgz$
